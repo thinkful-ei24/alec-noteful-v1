@@ -16,7 +16,7 @@ const simDB = {
   },
 
   // Asynchronous CRUD operations
-  create: function (newItem, callback) {
+  ourCreate: function (newItem, callback) {
     setTimeout(() => {
       try {
         newItem.id = this.nextVal++;
@@ -28,7 +28,7 @@ const simDB = {
     }, DELAY);
   },
 
-  filter: function (term, callback) {
+  ourFilter: function (term, callback) {
     setTimeout(() => {
       try {
         let list = term ? this.data.filter(item => item.title.includes(term)) : this.data;
@@ -39,7 +39,7 @@ const simDB = {
     }, DELAY);
   },
 
-  find: function (id, callback) {
+  ourFind: function (id, callback) {
     setTimeout(() => {
       try {
         id = Number(id);
@@ -51,7 +51,7 @@ const simDB = {
     }, DELAY);
   },
 
-  replace: function (id, replaceItem, callback) {
+  ourReplace: function (id, replaceItem, callback) {
     setTimeout(() => {
       try {
         id = Number(id);
@@ -68,7 +68,7 @@ const simDB = {
     });
   },
 
-  update: function (id, updateItem, callback) {
+  ourUpdate: function (id, updateItem, callback) {
     setTimeout(() => {
       try {
         id = Number(id);
@@ -84,7 +84,7 @@ const simDB = {
     }, DELAY);
   },
 
-  delete: function (id, callback) {
+  ourDelete: function (id, callback) {
     setTimeout(() => {
       try {
         id = Number(id);

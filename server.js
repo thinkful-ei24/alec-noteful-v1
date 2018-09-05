@@ -12,18 +12,25 @@ app.use(morgan(LOGGER));
 
 
 //http://127.0.0.1:8080/api/notes/?searchTerm=life
-app.get('/api/notes', (req, res) => {
+app.get('/api/notes', (req, res, next) => {
   const searchTerm = req.query.searchTerm;
-  const query = data.filter(data=>data.title.includes(searchTerm) || data.content.includes(searchTerm));
-  res.json(query);
+  notes.ourFilter(searchTerm, (err, list) => {
+   if (err) {
+     return next(err); // goes to error handler
+   }
+   res.json(list); // responds with filtered array
+ });
 });
 
 // INSERT EXPRESS APP CODE HERE...
 app.get('/api/notes/:id', (req, res) => {
-  const numId = Number(req.params.id);
-  const query = data.find(data => data.id === numId);
-  console.log(query);
-  res.json(query);
+  const numId = req.params.id)
+  notes.ourFind(numId, (err, list)=>{
+    if(err){
+      return next(err);
+    }
+    res.json(item);
+  });
 });
 
 app.use(function (req, res, next) {
