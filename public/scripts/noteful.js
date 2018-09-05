@@ -68,9 +68,20 @@ const noteful = (function () {
   function handleNoteFormSubmit() {
     $('.js-note-edit-form').on('submit', function (event) {
       event.preventDefault();
+      const editForm = $(event.currentTarget);
 
-      console.log('Submit Note, coming soon...');
+     const noteObj = {
+       title: editForm.find('.js-note-title-entry').val(),
+       content: editForm.find('.js-note-content-entry').val()
+     };
 
+     noteObj.id = store.currentNote.id;
+
+     api.update(noteObj.id, noteObj, updateResponse => {
+       store.currentNote = updateResponse;
+
+       render();
+     });
     });
   }
 
@@ -88,14 +99,14 @@ const noteful = (function () {
       event.preventDefault();
 
       console.log('Delete Note, coming soon...');
-      
+
     });
   }
 
   function bindEventListeners() {
     handleNoteItemClick();
     handleNoteSearchSubmit();
-
+    handleNoteFormSubmit(); // <<== Add this line
     handleNoteFormSubmit();
     handleNoteStartNewSubmit();
     handleNoteDeleteClick();
